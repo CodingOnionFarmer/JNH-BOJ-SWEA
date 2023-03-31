@@ -1,9 +1,3 @@
-rd = (-1, 1)
-ld = (-1, -1)
-lu = (1, -1)
-ru = (1, 1)
-
-
 def bruteforce(size):
     for move in range(size - 1, 1, -1):
         for x in range(size - move):
