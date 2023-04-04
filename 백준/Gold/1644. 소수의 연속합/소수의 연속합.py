@@ -1,12 +1,3 @@
-def bs(l, h, f):
-    m = (l + h) // 2
-    if m == l or primes[m] == f:
-        return m
-    if primes[m] < f:
-        return bs(m, h, f)
-    return bs(l, m, f)
-
-
 n = int(input())
 if n < 3:
     print(n - 1)
@@ -31,31 +22,25 @@ else:
     while s < n:
         s += primes[r]
         r += 1
-    if s == n:
+    if s == n or s - 2 == n:
         cnt += 1
-    if s - 2 == n:
-        cnt += 1
-        r -= 1
-    else:
-        r -= 1
-    r -= 1
+    y = r - 1
+    x = 2
+    s -= 5
+    r -= 2
     if r == 1:
         print(cnt)
     else:
         while r > 2:
-            find = n // r
-            lo = 0
-            hi = len(primes) - 1
-            t = max(bs(lo, hi, find), r - 1)
-            s = 0
-            for i in range(t - r + 1, t + 1):
-                s += primes[i]
             while s < n:
-                s -= primes[t - r + 1]
-                t += 1
-                s += primes[t]
+                s -= primes[x]
+                x += 1
+                y += 1
+                s += primes[y]
             if s == n:
                 cnt += 1
+            s -= primes[x]
+            x += 1
             r -= 1
         t = len(primes) - 2
         s = primes[t] + primes[t + 1]
