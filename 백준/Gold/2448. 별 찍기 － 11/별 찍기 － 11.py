@@ -18,4 +18,4 @@ def sierpinski(size, x, y):
 
 sierpinski(n, 0, n - 1)
 for line in board:
-    print(*line, sep='')
+    print(''.join(line))
