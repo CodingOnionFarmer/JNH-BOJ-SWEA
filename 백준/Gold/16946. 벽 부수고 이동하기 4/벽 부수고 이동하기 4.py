@@ -59,6 +59,4 @@ for i in range(n):
             maze[i][j] = (1 + sum(groups[i] for i in can_go_groups)) % 10
             # print(maze)
 for i in range(n):
-    for j in range(m):
-        print(maze[i][j], end='')
-    print()
+    print(*maze[i],sep='')
