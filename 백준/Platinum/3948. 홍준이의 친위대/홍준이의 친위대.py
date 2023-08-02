@@ -1,18 +1,5 @@
-arr = [1]
-
-for i in range(20):
-    comb = 1
-    next = 0
-    for j in range(i + 1):
-        left_j = arr[j] * arr[i - j] * comb
-        if j > 1:
-            left_j //= 2
-        if i - j > 1:
-            left_j //= 2
-        next += left_j
-        comb *= (i - j)
-        comb //= (j + 1)
-    arr.append(next)
+arr = [1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042, 707584, 5405530, 44736512, 398721962, 3807514624, 38783024290,
+       419730685952, 4809759350882, 58177770225664, 740742376475050]
 
 for tc in range(int(input())):
     print(arr[int(input())])
