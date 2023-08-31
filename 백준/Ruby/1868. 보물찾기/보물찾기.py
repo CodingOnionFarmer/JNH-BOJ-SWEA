@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 def br(k):  # binary round
     return 1 << (len(bin(k)) - 2)
 
