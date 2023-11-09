@@ -29,7 +29,7 @@ while pNow < p or fNow < f:
                 pumpsOnLeft[-len(connectedTrucksOnLeft) - 1] += 2 * (pumps[pNow] - lastTruck)
             hose += pumps[pNow] - lastTruck
         pNow += 1
-    elif pumps[pNow] > fireTrucks[fNow]:
+    else:
         connectedTrucksOnLeft.append(fireTrucks[fNow])
         if now == p:
             hose += connectedTrucksOnLeft.popleft() - pumpsOnLeft.pop()
@@ -46,8 +46,4 @@ while pNow < p or fNow < f:
             else:
                 now += 1
         fNow += 1
-    else:
-        fNow += 1
-        pNow += 1
-        now += 1
 print(hose)
