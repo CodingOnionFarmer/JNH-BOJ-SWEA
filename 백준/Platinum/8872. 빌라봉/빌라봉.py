@@ -92,4 +92,7 @@ else:
                         break
     longer_cuts.sort(reverse=True)
     longest_all.sort(reverse=True)
-    print(max(longest_all[0], longer_cuts[0] + longer_cuts[1] + l))
+    if len(endpoints_all) == 2:
+        print(max(longest_all[0], longer_cuts[0] + longer_cuts[1] + l))
+    else:
+        print(max(longest_all[0], longer_cuts[0] + longer_cuts[1] + l, longer_cuts[1] + longer_cuts[2] + 2 * l))
