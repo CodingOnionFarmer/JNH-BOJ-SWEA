@@ -1,43 +1,49 @@
-import sys
-import heapq
+import heapq, sys
 input = sys.stdin.readline
 
-
-test = int(input())
-for _ in range(test):
-    max_heap, min_heap = [], []
-    visit = [False] * 1_000_001
-
-    order_num = int(input())
-
-    for key in range(order_num):
-        order = input().rsplit()
-        if order[0] == 'I':
-            heapq.heappush(min_heap, (int(order[1]), key))
-            heapq.heappush(max_heap, (int(order[1]) * -1, key))
-            visit[key] = True
-
-        elif order[0] == 'D':
-            if order[1] == '-1':
-                while min_heap and not visit[min_heap[0][1]]:
-                    heapq.heappop(min_heap)
-                if min_heap:
-                    visit[min_heap[0][1]] = False
-                    heapq.heappop(min_heap)
-            elif order[1] == '1':
-                while max_heap and not visit[max_heap[0][1]]:
-                    heapq.heappop(max_heap)
-                if max_heap:
-                    visit[max_heap[0][1]] = False
-                    heapq.heappop(max_heap)
-
-                    
-    while min_heap and not visit[min_heap[0][1]]:
-        heapq.heappop(min_heap)
-    while max_heap and not visit[max_heap[0][1]]:
-        heapq.heappop(max_heap)
-
-    if min_heap and max_heap:
-        print(-max_heap[0][0], min_heap[0][0])
-    else:
+t = int(input())
+for _ in range(t):
+    k = int(input())
+    heap_min = []
+    heap_max = []
+    queue = {}
+    heap_length = 0
+    for i in range(k):
+        op, num = map(str, input().strip().split())
+        num = int(num)
+        if op == 'I':
+            heapq.heappush(heap_min, num)
+            heapq.heappush(heap_max, -num)
+            if num in queue:
+                queue[num] += 1
+            else:
+                queue[num] = 1
+            heap_length += 1
+        elif not heap_length:
+            pass
+        elif num == 1:
+            while True:
+                deleted = -heapq.heappop(heap_max)
+                if queue[deleted]:
+                    queue[deleted] -= 1
+                    break
+            heap_length -= 1
+        else:
+            while True:
+                deleted = heapq.heappop(heap_min)
+                if queue[deleted]:
+                    queue[deleted] -= 1
+                    break
+            heap_length -= 1
+    if not heap_length:
         print('EMPTY')
+    else:
+        while True:
+            maximum = -heapq.heappop(heap_max)
+            if queue[maximum]:
+                break
+        while True:
+            minimum = heapq.heappop(heap_min)
+            if queue[minimum]:
+                break
+        print(maximum, minimum)
